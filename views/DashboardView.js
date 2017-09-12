@@ -2,29 +2,12 @@
 
 import React, { Component } from 'react';
 
-import {
-  AsyncStorage,
-  Dimensions,
-  Image,
-  ListView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-import Icon from 'react-native-vector-icons/Entypo';
-
 import _ from 'lodash';
 
 import con_info from '../con_info.json';
 
 import dataStore from '../dataStore';
 import EventItem from '../components/EventItem';
-
-
-let window = Dimensions.get('window');
 
 
 export default class DashboardView extends Component {
@@ -73,24 +56,22 @@ export default class DashboardView extends Component {
 
   render() {
     return (
-      <View style={ styles.container }>
-        <ScrollView style={{ flexDirection: 'column' }}>
-          <Image style={{ flex: 1, height: 333, width: window.width }} source={ require('../img/dashboard.png') } />
-          <Text style={ styles.todoTitleText }>MY TO-DO LIST</Text>
-          { this.state.todoCount > 0 ? (
-          <ListView
-            tabLabel="My Todo List"
-            style={{ flex: 1, width: window.width }}
-            dataSource={ this.state.dataSource }
-            renderRow={ rowData => <EventItem key={ rowData.event_id } navigation={ this.props.navigation } event_id={ rowData.event_id } /> }
-          />
-          ) : (
-          <View style={ styles.todoEmpty }>
-            <Text style={ styles.todoEmptyText }>Your to-do list is empty. Select events from the Schedule to add them here.</Text>
-          </View>
-          ) }
-        </ScrollView>
-      </View>
+      <div style={ styles.container }>
+        <img style={{ flex: 1, height: 333, width: window.width }} src={ require('../img/dashboard.png') } />
+        <div style={ styles.todoTitleText }>MY TO-DO LIST</Text>
+        { this.state.todoCount > 0 ? (
+        <ListView
+          tabLabel="My Todo List"
+          style={{ flex: 1, width: window.width }}
+          dataSource={ this.state.dataSource }
+          renderRow={ rowData => <EventItem key={ rowData.event_id } navigation={ this.props.navigation } event_id={ rowData.event_id } /> }
+        />
+        ) : (
+        <div style={ styles.todoEmpty }>
+          <Text style={ styles.todoEmptyText }>Your to-do list is empty. Select events from the Schedule to add them here.</Text>
+        </div>
+        ) }
+      </div>
     );
   }
 

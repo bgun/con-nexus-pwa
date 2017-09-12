@@ -2,5 +2,19 @@
   "name": "jcon2018",
   "displayName": "JordanCon 2018",
   "resources": {
+    "app_data"        : "",
+    "app_icon"        : "",
+    "cover_image"     : "",
+    "dashboard_image" : "",
+    "map_image"       : ""
+  },
+  "styles": {
+    "colors": {
+      "border": "#DDD",
+      "headerBg": "#4270a9",
+      "highlight": "#2cb571",
+      "highlightDark": "#0c8551",
+      "menuBg": "#2b3e62"
+    }
   }
 }
