@@ -1,0 +1,15 @@
+{
+  "name": "con-nexus-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "test": ""
+  },
+  "dependencies": {
+    "react": "^16.0.0-alpha.6",
+    "react-dom": "^15.6.1",
+  },
+  "devDependencies": {
+  }
+}
