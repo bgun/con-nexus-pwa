@@ -7,12 +7,12 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
+} from '../reactNativeShim';
 
 import _      from 'lodash';
 import moment from 'moment';
 
-import Icon from 'react-native-vector-icons/Entypo';
+import { InternalLink, Text, View } from '../reactNativeShim';
 
 import globalStyles from '../globalStyles';
 
@@ -20,9 +20,6 @@ import globalStyles from '../globalStyles';
 export default class EventItem extends Component {
 
   render() {
-    const { navigate } = this.props.navigation;
-    console.log(this.props.navigation);
-
     let event = _.find(global.con_data.events, e => (e.event_id === this.props.event_id));
     if (!event) {
       throw new Error("Event not found!");
@@ -30,7 +27,7 @@ export default class EventItem extends Component {
     let isTodo = global.todos.has(event.event_id);
     let formatDate = moment.utc(event.datetime).format('dddd h:mma');
     return (
-      <TouchableOpacity style={[globalStyles.floatingListItem, styles.item]} onPress={ () => navigate("EventDetail", { event_id: event.event_id }) }>
+      <InternalLink style={[globalStyles.floatingListItem, styles.item]} onPress={ () => navigate("EventDetail", { event_id: event.event_id }) }>
         <View style={{ flex: 1 }}>
           <Text style={ styles.titleText }>{ event.title }</Text>
           <View style={{ flexDirection: 'row' }}>
@@ -41,7 +38,7 @@ export default class EventItem extends Component {
         { isTodo ? (
           <Icon name="star" color={ globalStyles.COLORS.highlight } size={20} style={{ paddingTop: 8, paddingRight: 8 }} />
         ) : null }
-      </TouchableOpacity>
+      </InternalLink>
     );
   }
 

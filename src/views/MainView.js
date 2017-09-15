@@ -1,19 +1,5 @@
 import React from 'react';
 
-import {
-  Alert,
-  AsyncStorage,
-  Dimensions,
-  Navigator,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
-
-
-import { StackRouter, DrawerNavigator, TabNavigator, StackNavigator } from 'react-navigation';
-
 import DashboardView   from './DashboardView';
 import DirectionsView  from './DirectionsView';
 import EventDetailView from './EventDetailView';
@@ -25,19 +11,6 @@ import Toast from '../components/Toast';
 import dataStore from '../dataStore';
 import globalStyles from '../globalStyles';
 
-
-let MainNavigator = StackNavigator({
-  Home: {
-    screen: DashboardView,
-    path: ''
-  },
-  Schedule: {
-    screen: ScheduleView,
-    path: 'schedule'
-  }
-}, {
-  initialRouteName: 'Home'
-});
 
 export default class MainView extends React.Component {
 

@@ -1,10 +1,9 @@
 'use strict';
 
+import _ from 'lodash';
 import React, { Component } from 'react';
 
-import _ from 'lodash';
-
-import con_info from '../con_info.json';
+import { InternalLink, Text, View } from '../reactNativeShim';
 
 import dataStore from '../dataStore';
 import EventItem from '../components/EventItem';
@@ -12,22 +11,11 @@ import EventItem from '../components/EventItem';
 
 export default class DashboardView extends Component {
 
-  static navigationOptions = {
-    tabBarLabel: "Home",
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="home" size={ 24 } color={ tintColor } />
-    ),
-    drawerLabel: "Home",
-    drawerIcon: ({ tintColor }) => (
-      <Icon name="home" size={ 24 } color={ tintColor } />
-    )
-  };
-
   constructor(props) {
     super();
     this.state = {
       con_data: global.con_data || {},
-      dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
+      todosArray: [],
       todoCount: 999
     };
     this.getTodos();
@@ -47,7 +35,7 @@ export default class DashboardView extends Component {
           }).sortBy("datetime").value();
 
           this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(todosArray),
+            todosArray: todosArray,
             todoCount: todosArray.length
           });
         }).done();
@@ -56,22 +44,23 @@ export default class DashboardView extends Component {
 
   render() {
     return (
-      <div style={ styles.container }>
-        <img style={{ flex: 1, height: 333, width: window.width }} src={ require('../img/dashboard.png') } />
-        <div style={ styles.todoTitleText }>MY TO-DO LIST</Text>
+      <View style={ styles.container }>
+        <Image style={{ flex: 1, height: 333, width: window.width }} src={ require('../img/dashboard.png') } />
+        <View style={ styles.todoTitleText }>MY TO-DO LIST</Text>
         { this.state.todoCount > 0 ? (
-        <ListView
-          tabLabel="My Todo List"
-          style={{ flex: 1, width: window.width }}
-          dataSource={ this.state.dataSource }
-          renderRow={ rowData => <EventItem key={ rowData.event_id } navigation={ this.props.navigation } event_id={ rowData.event_id } /> }
-        />
+          <ul>
+            { this.state.todosArray.map(item => (
+              <EventItem event_id={ item.event_id } >
+            ) }
+          </ul>
         ) : (
-        <div style={ styles.todoEmpty }>
-          <Text style={ styles.todoEmptyText }>Your to-do list is empty. Select events from the Schedule to add them here.</Text>
-        </div>
+          <View style={ styles.todoEmpty }>
+            <Text style={ styles.todoEmptyText }>
+              Your to-do list is empty. Select events from the Schedule to add them here.
+            </Text>
+          </View>
         ) }
-      </div>
+      </View>
     );
   }
 

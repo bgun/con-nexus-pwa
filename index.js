@@ -1,9 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 'use strict';
 import React, { Component } from 'react';
+
+import React from 'react'
+import ReactDom from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
+
+ReactDom.render(
+  <AppContainer>
+    <Root/>
+  </AppContainer>,
+  document.getElementById('root')
+);
+
 
 import {
   AppRegistry

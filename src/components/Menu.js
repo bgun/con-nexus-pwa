@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native'
+} from '../react-native-shim'
 
 import { Actions } from 'react-native-router-flux';
 
